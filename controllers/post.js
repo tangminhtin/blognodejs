@@ -2,6 +2,7 @@ const Post = require('../models/post');
 const Image = require('../models/image');
 const User = require('../models/user');
 const Comment = require('../models/comment');
+const { post } = require('../routes/post');
 
 exports.getIndex = (req, res, next) => {
     Post.findAll()
@@ -28,15 +29,28 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getPost = (req, res, next) => {
-    Comment.findAndCountAll()
-        .then(({count, rows}) => {
-            console.log(count);
-        })
-        .then(() => {
-            res.render('post/post', {
-                pageTitle: 'Welcome to Hack Brain Blog',
-                url: '/post'
-            });
+    // get postId from link
+    const postId = req.params.postId;
+
+    Post.findOne({where: {postId: postId}})
+        .then(post => {
+            User.findOne({where: {userId: post.userId}})
+                .then(user => {
+                    Image.findAll({where: {postId: post.postId}})
+                        .then(images => {
+                            Comment.findAll()
+                                .then(comments => {
+                                    res.render('post/post', {
+                                        pageTitle: post.title,
+                                        url: '/post',
+                                        post: post,
+                                        user: user,
+                                        images: images,
+                                        comments: comments
+                                    });
+                                })
+                        })
+                })
         })
         .catch(err => console.log(err));
 }

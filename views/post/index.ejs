@@ -25,7 +25,7 @@
 
 									<div class="blog-info">
 										<h4 class="title"><a href="#"><b><%= users.find(x => x.userId === post.userId).fullname %></b></a></h4>
-										<p class="title"><a href="#"><b><%= post.title %></b></a></p>
+										<p class="title"><a href="/post/<%=post.postId%>"><b><%= post.title %></b></a></p>
 
 										<ul class="post-footer">
 											<li><a href="#"><i class="ion-heart"></i><%= post.like %></a></li>
