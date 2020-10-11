@@ -13,6 +13,7 @@ const Post = sequelize.define('post', {
     date: Sequelize.DATE,
     like: Sequelize.INTEGER,
     view: Sequelize.INTEGER,
+    active: Sequelize.BOOLEAN,
     userId: Sequelize.INTEGER
 })
 

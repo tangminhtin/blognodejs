@@ -19,15 +19,14 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(path.join(__dirname, 'public')));
+
 // initialize routes
 const postRoutes = require('./routes/post');
 app.use(postRoutes);
 
 app.use(errorController.get404);
-
-
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, 'public')));
 
 // create table of database
 sequelize.sync()
@@ -35,5 +34,5 @@ sequelize.sync()
         app.listen(3000);
     })
     .catch(err => {
-        console.log(err);
+        // console.log(err);
     })
