@@ -17,6 +17,8 @@ npm run start-server
 
 ## npm install --save-dev nodemon
 
+## npm install -g nodemon
+
 ## npm install ejs
 
 ## npm install --save mysql2

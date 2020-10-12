@@ -100,33 +100,33 @@
 						</form>
 					</div><!-- comment-form -->
 
-					<h4><b>COMMENTS(<%= comments.filter(x => x.postId === post.postId).length %>)</b></h4>
+					<h4 id="comment"><b>COMMENTS(<%= comments.filter(x => x.postId === post.postId).length %>)</b></h4>
 
-					<div class="commnets-area text-left">
-						<% for (let comment of comments) { %>
-							<% if (user.userId === comment.userId && post.postId === comment.postId) {%>
-								<div class="comment">
-									<div class="post-info">
-										<div class="left-area">
-											<a class="avatar" href="#"><img src="<%=user.image%>" alt="Profile Image"></a>
+					<% if (comments.filter(x => x.postId === post.postId).length > 0 ) { %>
+						<div class="commnets-area text-left">
+							<% for (let comment of comments) { %>
+								<% for (let u of users ) { %>
+									<% if (u.userId === comment.userId && post.postId === comment.postId) {%>
+										<div class="comment">
+											<div class="post-info">
+												<div class="left-area">
+													<a class="avatar" href="#"><img src="<%=u.image%>" alt="Profile Image"></a>
+												</div>
+
+												<div class="middle-area">
+													<a class="name" href="#"><b><%=u.fullname%></b></a>
+													<h6 class="date">on <%=comment.date%></h6>
+												</div>
+											</div><!-- post-info -->
+
+											<p><%=comment.content%></p>
 										</div>
-
-										<div class="middle-area">
-											<a class="name" href="#"><b><%=user.fullname%></b></a>
-											<h6 class="date">on <%=comment.date%></h6>
-										</div>
-									</div><!-- post-info -->
-
-									<p><%=comment.content%></p>
-								</div>
+									<% } %>
+								<% } %>
 							<% } %>
-						<% } %>
-
-
-					</div><!-- commnents-area -->
-
-					<a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</a>
-
+						</div><!-- commnents-area -->
+						<a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</a>
+					<% } %>
 				</div><!-- col-lg-8 col-md-12 -->
 
 			</div><!-- row -->

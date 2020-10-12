@@ -30,11 +30,11 @@
 										<ul class="post-footer">
 											<li><a href="#"><i class="ion-heart"></i><%= post.like %></a></li>
 											<li>
-												<a href="#"><i class="ion-chatbubble"></i>
+												<a href="/post/<%=post.postId%>#comment"><i class="ion-chatbubble"></i>
 													<%= comments.filter(x => x.postId === post.postId).length %>
 												</a>
 											</li>
-											<li><a href="#"><i class="ion-eye"></i><%= post.view %></a></li>
+											<li><a href="/post/<%=post.postId%>"><i class="ion-eye"></i><%= post.view %></a></li>
 										</ul>
 									</div><!-- blog-info -->
 								</div><!-- single-post -->
