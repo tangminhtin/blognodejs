@@ -21,10 +21,10 @@
 							<div class="card h-100">
 								<div class="single-post post-style-1">
 									<div class="blog-image"><img src="<%= images.find(x => x.postId === post.postId).image %>" alt="Blog Image"></div>
-									<a class="avatar" href="#"><img src="<%= users.find(x => x.userId === post.userId).image %>" alt="Profile Image"></a>
+									<a class="avatar" href="/user/profile/<%=post.userId%>"><img src="<%= users.find(x => x.userId === post.userId).image %>" alt="Profile Image"></a>
 
 									<div class="blog-info">
-										<h4 class="title"><a href="#"><b><%= users.find(x => x.userId === post.userId).fullname %></b></a></h4>
+										<h4 class="title"><a href="/user/profile/<%=post.userId%>"><b><%= users.find(x => x.userId === post.userId).fullname %></b></a></h4>
 										<p class="title"><a href="/post/<%=post.postId%>"><b><%= post.title %></b></a></p>
 
 										<ul class="post-footer">

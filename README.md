@@ -24,3 +24,5 @@ npm run start-server
 ## npm install --save mysql2
 
 ## npm install --save sequelize
+
+## npm install mdbootstrap

@@ -39,4 +39,17 @@ exports.logout = (req,res) => {
     res.clearCookie('login').send("logout thanh cong");   
 }
 
+exports.getProfile = (req, res, next) => {
+    const userId = req.params.userId;
+    User.findOne({where: {userId: userId}})
+        .then(user => {
+            res.render('user/profile', {
+                pageTitle: 'User Profile',
+                url: '/profile',
+                user: user
+            });
+        })
+        .catch(err => console.log(err));
+};
+
 // exports.getUserAfterLogin()
