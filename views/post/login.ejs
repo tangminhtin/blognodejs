@@ -1,0 +1,58 @@
+<%- include('../includes/head.ejs') %>
+	<link href="category/css/styles.css" rel="stylesheet">
+	<link href="category/css/responsive.css" rel="stylesheet">
+</head>
+<body >
+
+	<%- include('../includes/navigation.ejs') %>
+
+	<div class="slider display-table center-text">
+		<h1 class="title display-table-cell"><b>BEAUTY</b></h1>
+	</div><!-- slider -->
+
+	<section class="blog-area section">
+		<div class="container col-xl-4">
+
+			<!-- Default form login -->
+			<form class="text-center border border-light p-5" action="/login" method="POST">
+
+				<p class="h4 mb-4">Sign in</p>
+				
+				<!-- Email -->
+				<input name="txtEmail" type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+
+				<!-- Password -->
+				<input name="txtPass" type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+
+				<div class="d-flex justify-content-around">
+					<div>
+						<!-- Remember me -->
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+							<label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+						</div>
+					</div>
+					<div>
+						<!-- Forgot password -->
+						<a href="">Forgot password?</a>
+					</div>
+				</div>
+
+				<!-- Sign in button -->
+				<button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+
+				<!-- Register -->
+				<p>Not a member?
+					<a href="/registration">Register</a>
+				</p>
+
+			</form>
+			<!-- Default form login -->
+
+	</div><!-- container -->
+</section><!-- section -->
+
+
+<%- include('../includes/footer.ejs') %>
+
+<%- include('../includes/end.ejs') %>

@@ -24,6 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // initialize routes
 const postRoutes = require('./routes/post');
+const userRoutes = require('./routes/user');
+app.use(userRoutes);
 app.use(postRoutes);
 
 app.use(errorController.get404);
