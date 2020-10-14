@@ -9,14 +9,14 @@ let app = express();
 app.use(cookieParser());
 
 exports.getLogin = (req,res,next) => {
-    res.render('post/login', {
+    res.render('user/login', {
         pageTitle: 'Login',
         url: '/login',
     });
 };
 
 exports.getRegistration = (req,res,next) => {
-    res.render('post/registration', {
+    res.render('user/registration', {
         pageTitle: 'Registration',
         url: '/registration',
     });
@@ -28,7 +28,7 @@ exports.login = (req,res,next) => {
 
     User.findOne({where: {email: email, password: password}})
         .then(user => {
-            res.cookie('login', user, {maxAge: 360000}).send(res.render('post/successful', {
+            res.cookie('login', user, {maxAge: 360000}).send(res.render('user/successful', {
                 pageTitle: 'Successful',
                 url: '/successful',
             }));
@@ -65,5 +65,3 @@ exports.getProfile = (req, res, next) => {
         })
         .catch(err => console.log(err));
 };
-
-// exports.getUserAfterLogin()
