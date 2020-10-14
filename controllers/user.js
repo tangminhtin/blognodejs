@@ -1,7 +1,9 @@
 const User = require('../models/user');
 const Image = require('../models/image');
+const Comment = require('../models/comment');
 let express = require('express');
 let cookieParser = require('cookie-parser');
+const Post = require('../models/post');
 
 let app = express();
 app.use(cookieParser());
@@ -43,11 +45,23 @@ exports.getProfile = (req, res, next) => {
     const userId = req.params.userId;
     User.findOne({where: {userId: userId}})
         .then(user => {
-            res.render('user/profile', {
-                pageTitle: 'User Profile',
-                url: '/profile',
-                user: user
-            });
+            Post.findAll({where: {userId: user.userId}})
+                .then(posts => {
+                    Image.findAll()
+                        .then(images => {
+                            Comment.findAll()
+                                .then(comments => {
+                                    res.render('user/profile', {
+                                        pageTitle: 'User Profile',
+                                        url: '/profile',
+                                        user: user,
+                                        posts: posts,
+                                        images: images,
+                                        comments: comments
+                                    });
+                                });
+                        });
+                }) ;
         })
         .catch(err => console.log(err));
 };
