@@ -33,7 +33,7 @@
 												</div>
 											</div><!-- post-info -->
 
-											<h3 class="title"><a href="#"><b><%= post.title %></b></a></h3>
+											<h3 class="title"><a href="/post/<%=post.postId%>"><b><%= post.title %></b></a></h3>
 											<p class="para"><%= post.content %></p>
 											<% for(let image of images) { %>
 												<% if (image.postId === post.postId) { %>

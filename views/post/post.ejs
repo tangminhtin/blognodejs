@@ -25,11 +25,11 @@
 
 							<div class="post-info">
 								<div class="left-area">
-									<a class="avatar" href="#"><img src="<%=user.image%>" alt="Profile Image"></a>
+									<a class="avatar" href="/user/profile/<%=post.userId%>"><img src="<%=user.image%>" alt="Profile Image"></a>
 								</div>
 
 								<div class="middle-area">
-									<a class="name" href="#"><b><%= user.fullname %></b></a>
+									<a class="name" href="/user/profile/<%=post.userId%>"><b><%= user.fullname %></b></a>
 									<h6 class="date">on <%= post.date %></h6>
 								</div>
 							</div><!-- post-info -->
@@ -103,11 +103,11 @@
 										<div class="comment">
 											<div class="post-info">
 												<div class="left-area">
-													<a class="avatar" href="#"><img src="<%=u.image%>" alt="Profile Image"></a>
+													<a class="avatar" href="/user/profile/<%=u.userId%>"><img src="<%=u.image%>" alt="Profile Image"></a>
 												</div>
 
 												<div class="middle-area">
-													<a class="name" href="#"><b><%=u.fullname%></b></a>
+													<a class="name" href="/user/profile/<%=u.userId%>"><b><%=u.fullname%></b></a>
 													<h6 class="date">on <%=comment.date%></h6>
 												</div>
 											</div><!-- post-info -->

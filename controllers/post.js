@@ -34,28 +34,34 @@ exports.getPost = (req, res, next) => {
 
     Post.findOne({where: {postId: postId}})
         .then(post => {
-            User.findAll()
-                .then(users => {
-                    User.findOne({where: {userId: post.userId}})
-                        .then(user => {
-                            Image.findAll({where: {postId: post.postId}})
-                                .then(images => {
-                                    Comment.findAll()
-                                        .then(comments => {
-                                            res.render('post/post', {
-                                                pageTitle: post.title,
-                                                url: '/post',
-                                                post: post,
-                                                users: users,
-                                                user: user,
-                                                images: images,
-                                                comments: comments
-                                            });
-                                        });
-                                });
-                        });
+            if (post === null) {
+                res.status(404).render('404', {
+                    pageTitle: 'Page Not Found',
+                    path: '/404'
                 });
-            
+            } else {
+                User.findAll()
+                    .then(users => {
+                        User.findOne({where: {userId: post.userId}})
+                            .then(user => {
+                                Image.findAll({where: {postId: post.postId}})
+                                    .then(images => {
+                                        Comment.findAll()
+                                            .then(comments => {
+                                                res.render('post/post', {
+                                                    pageTitle: post.title,
+                                                    url: '/post',
+                                                    post: post,
+                                                    users: users,
+                                                    user: user,
+                                                    images: images,
+                                                    comments: comments
+                                                });
+                                            });
+                                    });
+                            });
+                    });
+            }
         })
         .catch(err => console.log(err));
 }

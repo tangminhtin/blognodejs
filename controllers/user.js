@@ -45,7 +45,13 @@ exports.getProfile = (req, res, next) => {
     const userId = req.params.userId;
     User.findOne({where: {userId: userId}})
         .then(user => {
-            Post.findAll({where: {userId: user.userId}})
+            if (user === null) {
+                res.status(404).render('404', {
+                    pageTitle: 'Page Not Found',
+                    path: '/404'
+                });
+            } else {
+                Post.findAll({where: {userId: user.userId}})
                 .then(posts => {
                     Image.findAll()
                         .then(images => {
@@ -62,6 +68,8 @@ exports.getProfile = (req, res, next) => {
                                 });
                         });
                 }) ;
+            }
+            
         })
         .catch(err => console.log(err));
 };
