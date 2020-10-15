@@ -8,6 +8,8 @@
 
 ## npm install body-parser
 
+## npm i --save cookie-parser
+
 ## Add 
 "start" : "node app.js"
 
