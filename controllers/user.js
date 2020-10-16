@@ -8,6 +8,8 @@ const app = express();
 const cookieParser = require('cookie-parser');
 app.use(cookieParser);
 
+const mysql = require('mysql');
+
 exports.getLogin = (req, res, next) => {
     res.render('user/login', {
         pageTitle: 'Login',
@@ -104,4 +106,27 @@ var get_cookies = function(request) {
     });
     return cookies;
   };
+exports.registration = (req,res) =>{
+    let fullname = req.body.txtName;
+    let email = req.body.txtEmail;
+    let password = req.body.txtPassword;
+    var datetime = new Date();
+    console.log(datetime.toISOString().slice(0, 19).replace('T', ' '));
 
+    var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'root',
+        password : '',
+        database : 'hack-brain'
+      });
+       
+      connection.connect();
+       
+      connection.query("INSERT INTO users (fullname, email, password, image, active, createdAt, updatedAt) VALUES ('Tang Minh Tin', 'minhtin@gmail.com', '123', ' ', 1, '2020-10-10 18:57:35', '2020-10-10 18:57:35')",
+      function (error, results, fields) {
+        if (error) throw error;
+        console.log('The solution is: ', results.affectedRows);
+      });
+       
+      connection.end();
+}
