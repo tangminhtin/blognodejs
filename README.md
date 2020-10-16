@@ -28,3 +28,11 @@ npm run start-server
 ## npm install --save sequelize
 
 ## npm install mdbootstrap
+
+## npm install express-session
+
+## npm install csurf
+
+## npm install connect-flash
+
+## npm install bcryptjs

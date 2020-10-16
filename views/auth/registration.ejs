@@ -14,6 +14,10 @@
 
     <section class="blog-area section">
         <div class="container col-xl-4">
+            <% if (errorMessage) { %>
+                <div class="alert alert-danger" role="alert"><%= errorMessage %></div>
+            <% } %>
+            
             <div class="text-center">
                 <h3 class="font-weight-bold">Sign Up</h3>
             </div>
@@ -50,30 +54,33 @@
 
                 </table>
             </form> -->
+
+            
+
             <form action="/registration" enctype="multipart/form-data" method="POST">
                 
                 <div class="form-group text-left">
                     <label for="exampleInputPassword1">Fullname</label>
-                    <input type="text" class="form-control" placeholder="Fullname">
+                    <input name="fullname" type="text" class="form-control" placeholder="Fullname">
                 </div>
                 <div class="form-group text-left">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" aria-describedby="emailHelp"
-                        placeholder="Enter email">
+                    <input name="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
 
                 </div>
                 <div class="form-group text-left">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input name="password" type="password" class="form-control" placeholder="Password">
                 </div>
 
                 <div class="form-group text-left">
                     <label for="exampleInputPassword1">ComfirmPassword</label>
-                    <input type="password" class="form-control" placeholder="ComfirmPassword">
+                    <input name="confirm" type="password" class="form-control" placeholder="Comfirm Password">
                 </div>
                 <div class="form-group text-left">
-                    <input type="file" name="image" class="input-group input-file" />
-                    <button type="submit" name="upload" class="btn btn-primary pull-right">Upload</button>
+                    <!-- <input type="file" name="image" class="input-group input-file" />
+                    <button type="submit" name="upload" class="btn btn-primary pull-right">Upload</button> -->
+                    <input name="image" type="text" class="form-control" placeholder="Image URL">
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
