@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 11, 2020 at 07:32 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.33
+-- Generation Time: Oct 14, 2020 at 03:48 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -70,7 +71,8 @@ INSERT INTO `images` (`imageId`, `image`, `postId`, `createdAt`, `updatedAt`) VA
 (3, 'https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/s1080x2048/120838578_1000231983753556_7098471953511895813_o.jpg?_nc_cat=100&_nc_sid=8bfeb9&_nc_ohc=oJ_pY77zcsMAX9_1eoV&_nc_ht=scontent.fsgn5-5.fna&tp=7&oh=0c13ae24685c9562df98654876a9dd4c&oe=5FA5D0BA', 1, '2020-10-10 23:35:08', '2020-10-10 23:35:08'),
 (4, 'https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-9/52328308_2394305224189594_3661053045350858752_n.jpg?_nc_cat=110&_nc_sid=8bfeb9&_nc_ohc=3t09_QieGBgAX-rEZVX&_nc_ht=scontent.fsgn5-3.fna&oh=68260078d96257a4f4bcbe1dd20eb122&oe=5FA91936', 2, '2020-10-10 23:40:15', '2020-10-10 23:40:15'),
 (5, 'https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-9/120175326_782484252565059_7606333950439117425_o.jpg?_nc_cat=108&_nc_sid=8bfeb9&_nc_ohc=GN8MNAvxxVMAX9ZlXn4&_nc_ht=scontent-sin6-2.xx&oh=e5596b5703f49345101891318bfca834&oe=5FA95EED', 3, '2020-10-11 00:15:45', '2020-10-11 00:15:45'),
-(6, 'https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/p843x403/120929253_1020492918395957_2421866704022844717_o.jpg?_nc_cat=108&_nc_sid=b9115d&_nc_ohc=bSszHGeAQcUAX9dKrhf&_nc_ht=scontent.fsgn5-5.fna&tp=6&oh=a3b3529ca7084aeb48bc63096fd1f120&oe=5FA7429D', 3, '2020-10-11 00:15:45', '2020-10-11 00:15:45');
+(6, 'https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/p843x403/120929253_1020492918395957_2421866704022844717_o.jpg?_nc_cat=108&_nc_sid=b9115d&_nc_ohc=bSszHGeAQcUAX9dKrhf&_nc_ht=scontent.fsgn5-5.fna&tp=6&oh=a3b3529ca7084aeb48bc63096fd1f120&oe=5FA7429D', 3, '2020-10-11 00:15:45', '2020-10-11 00:15:45'),
+(7, 'https://scontent-hkg4-2.xx.fbcdn.net/v/t1.0-9/53431859_790037724695378_3570738017784037376_n.jpg?_nc_cat=104&_nc_sid=174925&_nc_ohc=9w3qEJQYRJ8AX8nEM4r&_nc_ht=scontent-hkg4-2.xx&oh=7d13b8533be68c8d15380f63fe4c3b6c&oe=5FAB9023', 4, '2020-10-14 20:21:28', '2020-10-14 20:21:28');
 
 -- --------------------------------------------------------
 
@@ -98,7 +100,8 @@ CREATE TABLE `posts` (
 INSERT INTO `posts` (`postId`, `title`, `content`, `date`, `like`, `view`, `active`, `userId`, `createdAt`, `updatedAt`) VALUES
 (1, 'Hôm nay mệt cả người', 'S mưa hoài z nè', '2020-10-10 18:59:10', 10, 99, 1, 1, '2020-10-10 18:59:10', '2020-10-10 18:59:10'),
 (2, 'Tú mới gạ 1 em xinh gái', 'Say 1 tí \r\nNghĩ lại chuyện đã qua', '2020-10-10 23:37:36', 99, 289, 1, 1, '2020-10-10 23:37:36', '2020-10-10 23:37:36'),
-(3, 'Được giải này sẽ bao lẩu mọi người', 'Không biết do mẫu hay do thợ chụp mà nó như thế nàyyyy', '2020-10-11 00:12:49', 134, 231, 1, 2, '2020-10-11 00:12:49', '2020-10-11 00:12:49');
+(3, 'Được giải này sẽ bao lẩu mọi người', 'Không biết do mẫu hay do thợ chụp mà nó như thế nàyyyy', '2020-10-11 00:12:49', 134, 231, 1, 2, '2020-10-11 00:12:49', '2020-10-11 00:12:49'),
+(4, 'Cần Thơ chiều nặng gió', '14/10/2020, tĩnh lặng như sóng.', '2020-10-14 20:19:01', 50, 100, 1, 3, '2020-10-14 19:41:04', '2020-10-14 19:41:04');
 
 -- --------------------------------------------------------
 
@@ -123,7 +126,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userId`, `fullname`, `email`, `password`, `image`, `active`, `createdAt`, `updatedAt`) VALUES
 (1, 'Tu Nguyen', 'tunguyen@gmail.com', '123', 'https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/60285766_2334417313497948_7506251336048967680_n.jpg?_nc_cat=111&_nc_sid=09cbfe&_nc_ohc=tw1mMlxKRIIAX9wKRvw&_nc_ht=scontent-sin6-1.xx&oh=b2f2860b4b4220f2b0b3a14f4e6254ba&oe=5FA8F933', 1, '2020-10-10 18:57:35', '2020-10-10 18:57:35'),
-(2, 'Son Hao', 'sonhao@gmail.com', '123', 'https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/73168445_2343709745891540_4086424003596517376_o.jpg?_nc_cat=104&_nc_sid=174925&_nc_ohc=jocbq54YmDwAX-j6UKK&_nc_ht=scontent-sin6-1.xx&oh=789c1c519efb8cce59125ffdb7386d9d&oe=5FA82696', 1, '2020-10-11 00:09:48', '2020-10-11 00:09:48');
+(2, 'Son Hao', 'sonhao@gmail.com', '123', 'https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/73168445_2343709745891540_4086424003596517376_o.jpg?_nc_cat=104&_nc_sid=174925&_nc_ohc=jocbq54YmDwAX-j6UKK&_nc_ht=scontent-sin6-1.xx&oh=789c1c519efb8cce59125ffdb7386d9d&oe=5FA82696', 1, '2020-10-11 00:09:48', '2020-10-11 00:09:48'),
+(3, 'Hua Quoc Vinh ', 'huavinh@gmail.com', '123', 'https://scontent-hkg4-1.xx.fbcdn.net/v/t1.0-9/69154420_899471010418715_5003434701369638912_n.jpg?_nc_cat=110&_nc_sid=174925&_nc_ohc=jSsEv2kq03AAX-Dc_BD&_nc_ht=scontent-hkg4-1.xx&oh=c4e9fb21343656eeeb23c4f44bf160be&oe=5FAB1EBA', 1, '2020-10-14 19:41:04', '2020-10-14 19:41:04');
 
 --
 -- Indexes for dumped tables
@@ -168,19 +172,19 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `imageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `imageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `postId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
