@@ -29,6 +29,8 @@ npm run start-server
 
 ## npm install mdbootstrap
 
+## npm install mysql
+
 ## npm install express-session
 
 ## npm install csurf
