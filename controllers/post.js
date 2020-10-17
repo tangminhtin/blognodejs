@@ -67,6 +67,7 @@ exports.getPost = (req, res, next) => {
                     path: '/404'
                 });
             } else {
+                Post.update({ view: ++post.view }, {where: {postId: post.postId}});
                 User.findAll()
                     .then(users => {
                         User.findOne({where: {userId: post.userId}})
