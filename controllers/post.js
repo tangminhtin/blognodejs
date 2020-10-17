@@ -5,7 +5,9 @@ const Comment = require('../models/comment');
 const { post } = require('../routes/post');
 
 exports.getIndex = (req, res, next) => {
-    Post.findAll()
+    const account = req.session.user;
+    if(!account){
+        Post.findAll()
         .then(posts => {
             User.findAll()
                 .then(users => {
@@ -26,6 +28,31 @@ exports.getIndex = (req, res, next) => {
                 });
         })
         .catch(err => console.log(err));
+    }else{
+        Post.findAll()
+        .then(posts => {
+            User.findAll()
+                .then(users => {
+                    Image.findAll()
+                        .then(images => {
+                            Comment.findAll()
+                                .then(comments => {
+                                    res.render('post/index', {
+                                        pageTitle: 'Welcome to Hack Brain Blog',
+                                        url: '/',
+                                        posts: posts,
+                                        users: users,
+                                        acc: account,
+                                        images: images,
+                                        comments: comments
+                                    });
+                                });
+                        });
+                });
+        })
+        .catch(err => console.log(err));
+    }
+    
 };
 
 exports.getPost = (req, res, next) => {
@@ -62,6 +89,38 @@ exports.getPost = (req, res, next) => {
                             });
                     });
             }
+        })
+        .catch(err => console.log(err));
+};
+exports.doPost = (req,res) => {
+    const userIdPost = req.body.userPostId;
+    const postTitle = req.body.txtPostTitle;
+    const postContent = req.body.txtPostContent;
+    const postImageURL = req.body.txtPostImage;
+    const datetime = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    console.log(userIdPost, postTitle, postContent, postImageURL, datetime);
+
+    Post
+        .create({
+            title: postTitle,
+            content: postContent,
+            date: datetime,
+            like: 0,
+            view: 0,
+            active: 1,
+            userId: userIdPost
+        })
+        .then(result => {
+            Image
+                .create({
+                    image: postImageURL,
+                    postId: result.postId
+                })
+                .then(result => {
+                    console.log('post was created');
+                    res.redirect('/');
+                })
+                .catch(err => console.log(err));
         })
         .catch(err => console.log(err));
 }

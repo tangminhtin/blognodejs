@@ -109,7 +109,12 @@ exports.postLogin = (req, res, next) => {
 
 // handler logout
 exports.logout = (req, res) => {
-    res.clearCookie('user').send("logout thanh cong");
+    if (req.session.user) {
+        req.session.destroy(err => {
+            console.log(err);
+            res.redirect('/');
+        })
+    }
 }
 
 exports.getSuccessful = (req, res) => {
