@@ -38,3 +38,5 @@ npm run start-server
 ## npm install connect-flash
 
 ## npm install bcryptjs
+
+## npm install connect-session-sequelize

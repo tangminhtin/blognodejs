@@ -14,15 +14,18 @@
 		<div class="container col-xl-4">
 
 			<!-- Default form login -->
-			<form class="text-center border border-light p-5" action="/login" method="POST">
-
+			<form class="text-center border border-light" action="/login" method="POST">
+				<% if (errorMessage) { %>
+					<div class="alert alert-danger" role="alert"><%= errorMessage %></div>
+				<% } %>
+				
 				<p class="h4 mb-4">Sign in</p>
 				
 				<!-- Email -->
-				<input name="txtEmail" type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+				<input name="txtEmail" type="email" id="txtEmail" class="form-control mb-4" placeholder="E-mail" required>
 
 				<!-- Password -->
-				<input name="txtPass" type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+				<input name="txtPass" type="password" id="txtPass" class="form-control mb-4" placeholder="Password" required>
 
 				<div class="d-flex justify-content-around">
 					<div>

@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./util/database.js');
 const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const csrf = require('csurf');
 const flash = require('connect-flash');
 
@@ -32,14 +33,41 @@ const postRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
 const authRoutes = require('./routes/auth');
 
+// store session in to database
 app.use(session({
-    secret: "my secret",
+    secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
+    store: new SequelizeStore({
+        db: sequelize,
+        checkExpirationInterval: 15 * 60 * 1000,
+        expiration: 24 * 60 * 60 * 1000
+    })
 }));
+
 // app.use(csrfProtection);
 app.use(flash());
 
+// store user session
+app.use((req, res, next) => {
+    if (!req.session.user) {
+        return next();
+    } 
+    User.findByPk(req.session.user.userId)
+        .then(user => {
+            req.user = user;
+            next();
+        })
+        .catch(err => console.log(err));
+})
+
+// create locals variable
+app.use((req, res, next) => {
+    // req.locals.isAuthenticated = req.session.isLoggedIn;
+    next();
+});
+
+// routing was started
 app.use(userRoutes);
 app.use(postRoutes);
 app.use(authRoutes);
