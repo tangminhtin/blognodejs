@@ -83,7 +83,7 @@
 							<p class="title"><a href="/post/<%=post.postId%>"><b><%= post.title %></b></a></p>
 
 							<ul class="post-footer">
-								<li><a href="#"><i class="ion-heart"></i><%= post.like %></a></li>
+								<li><a id="heart" href="/updateHeart/<%=post.postId%>"><i class="ion-heart"></i><%= post.like %></a></li>
 								<li>
 									<a href="/post/<%=post.postId%>#comment"><i class="ion-chatbubble"></i>
 										<%= comments.filter(x => x.postId === post.postId).length %>
