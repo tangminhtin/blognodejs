@@ -7,8 +7,12 @@
 
         <ul class="main-menu visible-on-click" id="main-menu">
             <li><a href="/">Home</a></li>
+            <%if(!isAuthenticated){%>
             <li><a href="/login">Login</a></li>
+            <li><a href="/registration">Sign Up</a></li>
+            <%}else if(isAuthenticated){%>
             <li><a href="/logout">Logout</a></li>
+            <%}%>
         </ul><!-- main-menu -->
 
         <div class="src-area">

@@ -149,5 +149,5 @@ exports.updateLike = (req, res) => {
         })
         .catch(err => console.log(err));
 
-    res.redirect('/#heart');
+        res.redirect('/#heart');
 }

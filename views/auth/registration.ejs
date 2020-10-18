@@ -9,7 +9,7 @@
     <%- include('../includes/navigation.ejs') %>
 
     <div class="slider display-table">
-        <h1 class="title display-table-cell text-center"><b></b></h1>
+        <h1 class="title display-table-cell text-center"><b>SIGN UP</b></h1>
     </div><!-- slider -->
 
     <section class="blog-area section">
@@ -17,10 +17,6 @@
             <% if (errorMessage) { %>
                 <div class="alert alert-danger" role="alert"><%= errorMessage %></div>
             <% } %>
-            
-            <div class="text-center">
-                <h3 class="font-weight-bold">Sign Up</h3>
-            </div>
 
             <form action="/registration" method="POST">
                 <div class="form-group text-left">
