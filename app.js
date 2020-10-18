@@ -63,7 +63,7 @@ app.use((req, res, next) => {
 
 // create locals variable
 app.use((req, res, next) => {
-    // req.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.isAuthenticated = req.session.isLoggedIn;
     next();
 });
 

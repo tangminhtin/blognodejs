@@ -18,6 +18,46 @@
 			<div class="row">
 				<div class="col-lg-8 col-md-12 no-right-padding">
 					<% if (posts.length > 0) { %>
+
+						<% if (isAuthenticated && posts[0].userId === acc.userId) { %>
+							<% if (posts.length > 0) { %>
+								<form action="/post" method="post" class="comment-form">
+									<input type="hidden" value="<%=acc.userId%>" name="userPostId" />
+									<div class="commnets-area text-left">
+										<div class="comment">
+											<div class="post-info">
+												<div class="left-area"><a class="avatar" href="#"><img src="<%=acc.image%>" alt="Profile Image"></a></div>
+												<div class="middle-area"><a class="name" href="#"><b><%=acc.fullname%></b></a></div>
+											</div><!-- post-info -->
+			
+											<div class="row">
+												<div class="col-sm-6">
+													<input name="txtPostTitle" type="text" aria-required="true" name="contact-form-name"
+														class="form-control" placeholder="Enter your post title" aria-invalid="true"
+														required>
+												</div><!-- col-sm-6 -->
+												<div class="col-sm-6">
+													<input name="txtPostContent" type="text" aria-required="true" name="contact-form-email"
+														class="form-control" placeholder="<%=acc.fullname%>, What are you thinking?"
+														aria-invalid="true" required>
+												</div><!-- col-sm-6 -->
+			
+												<div class="col-sm-12">
+													<textarea name="txtPostImage" rows="2" class="text-area-messge form-control"
+														placeholder="Input your image URL" aria-required="true" aria-invalid="false"
+														required></textarea>
+												</div>
+												<div class="col-sm-12">
+													<button name="btnPost" class="submit-btn" type="submit"
+														id="form-submit"><b>POST</b></button>
+												</div><!-- col-sm-12 -->
+											</div><!-- row -->
+										</div>
+									</div>
+								</form>
+							<% } %>
+						<% }%>
+
 						<% for (let post of posts) { %> 
 							<% if (post.userId === user.userId) { %>
 								

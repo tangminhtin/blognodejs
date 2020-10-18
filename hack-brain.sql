@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 14, 2020 at 03:48 PM
+-- Generation Time: Oct 18, 2020 at 01:14 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.28
 
@@ -86,6 +86,7 @@ CREATE TABLE `posts` (
   `content` text DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   `like` int(11) DEFAULT NULL,
+  `likeStatus` tinyint(1) DEFAULT NULL,
   `view` int(11) DEFAULT NULL,
   `active` tinyint(1) DEFAULT NULL,
   `userId` int(11) DEFAULT NULL,
@@ -97,11 +98,25 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`postId`, `title`, `content`, `date`, `like`, `view`, `active`, `userId`, `createdAt`, `updatedAt`) VALUES
-(1, 'Hôm nay mệt cả người', 'S mưa hoài z nè', '2020-10-10 18:59:10', 10, 99, 1, 1, '2020-10-10 18:59:10', '2020-10-10 18:59:10'),
-(2, 'Tú mới gạ 1 em xinh gái', 'Say 1 tí \r\nNghĩ lại chuyện đã qua', '2020-10-10 23:37:36', 99, 289, 1, 1, '2020-10-10 23:37:36', '2020-10-10 23:37:36'),
-(3, 'Được giải này sẽ bao lẩu mọi người', 'Không biết do mẫu hay do thợ chụp mà nó như thế nàyyyy', '2020-10-11 00:12:49', 134, 231, 1, 2, '2020-10-11 00:12:49', '2020-10-11 00:12:49'),
-(4, 'Cần Thơ chiều nặng gió', '14/10/2020, tĩnh lặng như sóng.', '2020-10-14 20:19:01', 50, 100, 1, 3, '2020-10-14 19:41:04', '2020-10-14 19:41:04');
+INSERT INTO `posts` (`postId`, `title`, `content`, `date`, `like`, `likeStatus`, `view`, `active`, `userId`, `createdAt`, `updatedAt`) VALUES
+(1, 'Hôm nay mệt cả người', 'S mưa hoài z nè', '2020-10-10 18:59:10', 10, 0, 99, 1, 1, '2020-10-10 18:59:10', '2020-10-18 05:21:15'),
+(2, 'Tú mới gạ 1 em xinh gái', 'Say 1 tí \r\nNghĩ lại chuyện đã qua', '2020-10-10 23:37:36', 99, 0, 289, 1, 1, '2020-10-10 23:37:36', '2020-10-10 23:37:36'),
+(3, 'Được giải này sẽ bao lẩu mọi người', 'Không biết do mẫu hay do thợ chụp mà nó như thế nàyyyy', '2020-10-11 00:12:49', 134, 0, 231, 1, 2, '2020-10-11 00:12:49', '2020-10-11 00:12:49'),
+(4, 'Cần Thơ chiều nặng gió', '14/10/2020, tĩnh lặng như sóng.', '2020-10-14 20:19:01', 50, 0, 100, 1, 3, '2020-10-14 19:41:04', '2020-10-14 19:41:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Session`
+--
+
+CREATE TABLE `Session` (
+  `sid` varchar(36) NOT NULL,
+  `expires` datetime DEFAULT NULL,
+  `data` text DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -127,7 +142,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`userId`, `fullname`, `email`, `password`, `image`, `active`, `createdAt`, `updatedAt`) VALUES
 (1, 'Tu Nguyen', 'tunguyen@gmail.com', '123', 'https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/60285766_2334417313497948_7506251336048967680_n.jpg?_nc_cat=111&_nc_sid=09cbfe&_nc_ohc=tw1mMlxKRIIAX9wKRvw&_nc_ht=scontent-sin6-1.xx&oh=b2f2860b4b4220f2b0b3a14f4e6254ba&oe=5FA8F933', 1, '2020-10-10 18:57:35', '2020-10-10 18:57:35'),
 (2, 'Son Hao', 'sonhao@gmail.com', '123', 'https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/73168445_2343709745891540_4086424003596517376_o.jpg?_nc_cat=104&_nc_sid=174925&_nc_ohc=jocbq54YmDwAX-j6UKK&_nc_ht=scontent-sin6-1.xx&oh=789c1c519efb8cce59125ffdb7386d9d&oe=5FA82696', 1, '2020-10-11 00:09:48', '2020-10-11 00:09:48'),
-(3, 'Hua Quoc Vinh ', 'huavinh@gmail.com', '123', 'https://scontent-hkg4-1.xx.fbcdn.net/v/t1.0-9/69154420_899471010418715_5003434701369638912_n.jpg?_nc_cat=110&_nc_sid=174925&_nc_ohc=jSsEv2kq03AAX-Dc_BD&_nc_ht=scontent-hkg4-1.xx&oh=c4e9fb21343656eeeb23c4f44bf160be&oe=5FAB1EBA', 1, '2020-10-14 19:41:04', '2020-10-14 19:41:04');
+(3, 'Hua Quoc Vinh ', 'huavinh@gmail.com', '123', 'https://scontent-hkg4-1.xx.fbcdn.net/v/t1.0-9/69154420_899471010418715_5003434701369638912_n.jpg?_nc_cat=110&_nc_sid=174925&_nc_ohc=jSsEv2kq03AAX-Dc_BD&_nc_ht=scontent-hkg4-1.xx&oh=c4e9fb21343656eeeb23c4f44bf160be&oe=5FAB1EBA', 1, '2020-10-14 19:41:04', '2020-10-14 19:41:04'),
+(4, 'HuaVinh', 'vinhhqce140143@fpt.edu.vn', '$2a$12$EFGanBJMdMXQp3c74bdLhu8tiIxt/7GEi0i6y1Vcp5QVngaUbYlBi', 'https://scontent.fvca1-2.fna.fbcdn.net/v/t1.0-9/53431859_790037724695378_3570738017784037376_n.jpg?_nc_cat=104&_nc_sid=174925&_nc_ohc=T3hytQTC4AIAX8AF5XE&_nc_ht=scontent.fvca1-2.fna&oh=a7298864ba1b90f80476c688ccd59e19&oe=5FAF84A3', 1, '2020-10-18 05:20:47', '2020-10-18 05:20:47');
 
 --
 -- Indexes for dumped tables
@@ -150,6 +166,12 @@ ALTER TABLE `images`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`postId`);
+
+--
+-- Indexes for table `Session`
+--
+ALTER TABLE `Session`
+  ADD PRIMARY KEY (`sid`);
 
 --
 -- Indexes for table `users`
@@ -184,7 +206,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -51,7 +51,7 @@ exports.postRegistration = (req, res, next) => {
                         })  
                         .then(result => {
                             console.log('User was created!');
-                            res.redirect('/');
+                            res.redirect('/login');
                         })           
                 })
         })

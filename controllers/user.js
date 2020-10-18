@@ -74,7 +74,8 @@ exports.getProfile = (req, res, next) => {
                                             user: user,
                                             posts: posts,
                                             images: images,
-                                            comments: comments
+                                            comments: comments,
+                                            acc: req.session.user
                                         });
                                     });
                             });
