@@ -7,6 +7,7 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const multer = require('multer');
 
 // import controllers
 const errorController = require('./controllers/error');
@@ -18,8 +19,21 @@ const Image = require('./models/image');
 const Comment = require('./models/comment');
 
 const app = express();
-
 const csrfProtection = csrf();
+
+// store images
+const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '/public/uploads/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, new Date().toISOString + '-' + file.originalname);
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype = 'image,png')
+}
 
 // set dynamic with website with template engine
 app.set('view engine', 'ejs');
@@ -45,7 +59,7 @@ app.use(session({
     })
 }));
 
-// app.use(csrfProtection);
+app.use(csrfProtection);
 app.use(flash());
 
 // store user session
@@ -64,6 +78,7 @@ app.use((req, res, next) => {
 // create locals variable
 app.use((req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.csrfToken = req.csrfToken();
     next();
 });
 

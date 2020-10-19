@@ -47,6 +47,7 @@
 														placeholder="Input your image URL" aria-required="true" aria-invalid="false"
 														required></textarea>
 												</div>
+												<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 												<div class="col-sm-12">
 													<button name="btnPost" class="submit-btn" type="submit"
 														id="form-submit"><b>POST</b></button>

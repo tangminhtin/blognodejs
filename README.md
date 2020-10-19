@@ -40,3 +40,5 @@ npm run start-server
 ## npm install bcryptjs
 
 ## npm install connect-session-sequelize
+
+## npm install --save multer
