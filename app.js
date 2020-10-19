@@ -24,15 +24,19 @@ const csrfProtection = csrf();
 // store images
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '/public/uploads/')
+        cb(null, 'uploads')
     },
     filename: (req, file, cb) => {
-        cb(null, new Date().toISOString + '-' + file.originalname);
+        cb(null, new Date().toISOString() + '-' + file.originalname);
     }
 });
 
 const fileFilter = (req, file, cb) => {
-    if (file.mimetype = 'image,png')
+    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
 }
 
 // set dynamic with website with template engine
@@ -40,7 +44,9 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // initialize routes
 const postRoutes = require('./routes/post');

@@ -23,8 +23,7 @@ exports.postRegistration = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     const confirm = req.body.confirm;
-    const image = req.body.image;
-    console.log(fullname, email, password, confirm, image);
+    const image = req.file.path;
 
     User.findOne({ where: {email: email}})
         .then(user => {
@@ -52,7 +51,8 @@ exports.postRegistration = (req, res, next) => {
                         .then(result => {
                             console.log('User was created!');
                             res.redirect('/login');
-                        })           
+                        }) 
+                        .catch(err => console.log(err));          
                 })
         })
         .catch(err => console.log(err));
