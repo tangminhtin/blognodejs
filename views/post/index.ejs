@@ -16,74 +16,117 @@
 	<section class="blog-area section">
 		<div class="container">
 			<% if (isAuthenticated) { %>
-				<% if (posts.length > 0) { %>
-					<form action="/post" method="post" class="comment-form">
-						<input type="hidden" value="<%=acc.userId%>" name="userPostId" />
-						<div class="commnets-area text-left">
-							<div class="comment">
-								<div class="post-info">
-									<div class="left-area"><a class="avatar" href="/user/profile/<%=acc.userId%>"><img src="<%=acc.image%>" alt="Profile Image"></a></div>
-									<div class="middle-area"><a class="name" href="/user/profile/<%=acc.userId%>"><b><%=acc.fullname%></b></a></div>
-								</div><!-- post-info -->
+			<% if (posts.length > 0) { %>
+			<form action="/post" method="post" class="comment-form">
+				<input type="hidden" value="<%=acc.userId%>" name="userPostId" />
+				<div class="commnets-area text-left">
+					<div class="comment">
+						<div class="post-info">
+							<div class="left-area"><a class="avatar" href="/user/profile/<%=acc.userId%>"><img
+										src="<%=acc.image%>" alt="Profile Image"></a></div>
+							<div class="middle-area"><a class="name"
+									href="/user/profile/<%=acc.userId%>"><b><%=acc.fullname%></b></a></div>
+						</div><!-- post-info -->
 
-								<div class="row">
-									<div class="col-sm-6">
-										<input name="txtPostTitle" type="text" aria-required="true" name="contact-form-name"
-											class="form-control" placeholder="Enter your post title" aria-invalid="true"
-											required>
-									</div><!-- col-sm-6 -->
-									<div class="col-sm-6">
-										<input name="txtPostContent" type="text" aria-required="true" name="contact-form-email"
-											class="form-control" placeholder="<%=acc.fullname%>, What are you thinking?"
-											aria-invalid="true" required>
-									</div><!-- col-sm-6 -->
+						<div class="row">
+							<div class="col-sm-6">
+								<input name="txtPostTitle" type="text" aria-required="true" name="contact-form-name"
+									class="form-control" placeholder="Enter your post title" aria-invalid="true"
+									required>
+							</div><!-- col-sm-6 -->
+							<div class="col-sm-6">
+								<input name="txtPostContent" type="text" aria-required="true" name="contact-form-email"
+									class="form-control" placeholder="<%=acc.fullname%>, What are you thinking?"
+									aria-invalid="true" required>
+							</div><!-- col-sm-6 -->
 
-									<div class="col-sm-12">
-										<textarea name="txtPostImage" rows="2" class="text-area-messge form-control"
-											placeholder="Input your image URL" aria-required="true" aria-invalid="false"
-											required></textarea>
-									</div>
-									<div class="col-sm-12">
-										<button name="btnPost" class="submit-btn" type="submit"
-											id="form-submit"><b>POST</b></button>
-									</div><!-- col-sm-12 -->
-								</div><!-- row -->
+							<div class="col-sm-12">
+								<textarea name="txtPostImage" rows="2" class="text-area-messge form-control"
+									placeholder="Input your image URL" aria-required="true" aria-invalid="false"
+									required></textarea>
 							</div>
-						</div>
-					</form>
-				<% } %>
+							<div class="col-sm-12">
+								<button name="btnPost" class="submit-btn" type="submit"
+									id="form-submit"><b>POST</b></button>
+							</div><!-- col-sm-12 -->
+						</div><!-- row -->
+					</div>
+				</div>
+			</form>
+			<% } %>
 			<% }%>
 
 			<div class="row">
 				<% if (posts.length > 0) { %>
-					<% for(let post of posts) { %>
-						<div class="col-lg-4 col-md-6">
-							<div class="card h-100">
-								<div class="single-post post-style-1">
-									<div class="blog-image"><img src="<%= images.find(x => x.postId === post.postId).image %>"
-											alt="Blog Image"></div>
-									<a class="avatar" href="/user/profile/<%=post.userId%>"><img
-											src="<%= users.find(x => x.userId === post.userId).image %>" alt="Profile Image"></a>
+				<% for(let post of posts) {
+						if(isAuthenticated){ %>
+				<div class="col-lg-4 col-md-6">
+					<div class="card h-100">
+						<div class="single-post post-style-1">
+							<div class="blog-image"><img src="<%= images.find(x => x.postId === post.postId).image %>"
+									alt="Blog Image"></div>
+							<a class="avatar" href="/user/profile/<%=post.userId%>"><img
+									src="<%= users.find(x => x.userId === post.userId).image %>"
+									alt="Profile Image"></a>
 
-									<div class="blog-info">
-										<h4 class="title"><a href="/user/profile/<%=post.userId%>"><b><%= users.find(x => x.userId === post.userId).fullname %></b></a></h4>
-										<p class="title"><a href="/post/<%=post.postId%>"><b><%= post.title %></b></a></p>
-										<ul class="post-footer">
-											<li><a id="heart" href="/updateHeart/<%=post.postId%>"><i class="ion-heart"></i><%= post.like %></a></li>
-											<li>
-												<a href="/post/<%=post.postId%>#comment"><i class="ion-chatbubble"></i>
-													<%= comments.filter(x => x.postId === post.postId).length %>
-												</a>
-											</li>
-											<li><a href="/post/<%=post.postId%>"><i class="ion-eye"></i><%= post.view %></a></li>
-										</ul>
-									</div><!-- blog-info -->
-								</div><!-- single-post -->
-							</div><!-- card -->
-						</div><!-- col-lg-4 col-md-6 -->
-					<% } %>
-				<% } else { %>
-					<h1>There are currently no new posts</h1>
+							<div class="blog-info">
+								<h4 class="title"><a
+										href="/user/profile/<%=post.userId%>"><b><%= users.find(x => x.userId === post.userId).fullname %></b></a>
+								</h4>
+								<p class="title"><a href="/post/<%=post.postId%>"><b><%= post.title %></b></a></p>
+
+								<ul class="post-footer">
+									<li><a id="heart" href="/updateHeart/<%=post.postId%>"><i
+												class="ion-heart"></i><%= post.like %></a></li>
+									<li>
+										<a href="/post/<%=post.postId%>#comment"><i class="ion-chatbubble"></i>
+											<%= comments.filter(x => x.postId === post.postId).length %>
+										</a>
+									</li>
+									<li><a href="/post/<%=post.postId%>"><i class="ion-eye"></i><%= post.view %></a>
+									</li>
+								</ul>
+
+							</div><!-- blog-info -->
+						</div><!-- single-post -->
+					</div><!-- card -->
+				</div><!-- col-lg-4 col-md-6 -->
+				<% }else if(!isAuthenticated){%>
+				<div class="col-lg-4 col-md-6">
+					<div class="card h-100">
+						<div class="single-post post-style-1">
+							<div class="blog-image"><img src="<%= images.find(x => x.postId === post.postId).image %>"
+									alt="Blog Image"></div>
+							<a class="avatar" href="/login"><img
+									src="<%= users.find(x => x.userId === post.userId).image %>"
+									alt="Profile Image"></a>
+
+							<div class="blog-info">
+								<h4 class="title"><a
+										href="/login"><b><%= users.find(x => x.userId === post.userId).fullname %></b></a>
+								</h4>
+								<p class="title"><a href="/login"><b><%= post.title %></b></a></p>
+
+								<!-- <ul class="post-footer">
+									<li><a id="heart" href="/updateHeart/<%=post.postId%>"><i
+												class="ion-heart"></i><%= post.like %></a></li>
+									<li>
+										<a href="/post/<%=post.postId%>#comment"><i class="ion-chatbubble"></i>
+											<%= comments.filter(x => x.postId === post.postId).length %>
+										</a>
+									</li>
+									<li><a href="/post/<%=post.postId%>"><i class="ion-eye"></i><%= post.view %></a>
+									</li>
+								</ul> -->
+
+							</div><!-- blog-info -->
+						</div><!-- single-post -->
+					</div><!-- card -->
+				</div><!-- col-lg-4 col-md-6 -->
+				<%		}
+ 					}
+			 	} else { %>
+				<h1>There are currently no new posts</h1>
 				<% } %>
 			</div><!-- row -->
 
