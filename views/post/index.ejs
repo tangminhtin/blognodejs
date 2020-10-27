@@ -35,16 +35,17 @@
 									required>
 							</div><!-- col-sm-6 -->
 							<div class="col-sm-6">
-								<input name="txtPostContent" type="text" aria-required="true" name="contact-form-email"
-									class="form-control" placeholder="<%=acc.fullname%>, What are you thinking?"
+								<input  name="txtPostImage" type="text" aria-required="true" name="contact-form-email"
+									class="form-control" placeholder="Input your image URL" 
 									aria-invalid="true" required>
 							</div><!-- col-sm-6 -->
 
 							<div class="col-sm-12">
-								<textarea name="txtPostImage" rows="2" class="text-area-messge form-control"
-									placeholder="Input your image URL" aria-required="true" aria-invalid="false"
-									required></textarea>
+								<textarea name="txtPostContent" rows="2" class="text-area-messge form-control"
+									 aria-required="true" aria-invalid="false"
+									required placeholder="<%=acc.fullname%>, What are you thinking?"></textarea>
 							</div>
+							<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 							<div class="col-sm-12">
 								<button name="btnPost" class="submit-btn" type="submit"
 									id="form-submit"><b>POST</b></button>
