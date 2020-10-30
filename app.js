@@ -17,6 +17,7 @@ const User = require('./models/user');
 const Post = require('./models/post');
 const Image = require('./models/image');
 const Comment = require('./models/comment');
+const likeheart = require('./models/likeheart');
 
 const app = express();
 const csrfProtection = csrf();
@@ -97,7 +98,9 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 // create table of database
-sequelize.sync()
+sequelize.sync({
+    force: false//xoa het du lieu
+})
     .then(() => {
         app.listen(3000);
     })

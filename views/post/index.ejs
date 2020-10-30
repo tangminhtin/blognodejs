@@ -16,8 +16,8 @@
 	<section class="blog-area section">
 		<div class="container">
 			<% if (isAuthenticated) { %>
-			<% if (posts.length > 0) { %>
-			<form action="/post" method="post" class="comment-form">
+			
+			<form action="/post" method="post" class="comment-form" enctype="multipart/form-data">
 				<input type="hidden" value="<%=acc.userId%>" name="userPostId" />
 				<div class="commnets-area text-left">
 					<div class="comment">
@@ -35,10 +35,16 @@
 									required>
 							</div><!-- col-sm-6 -->
 							<div class="col-sm-6">
-								<input  name="txtPostImage" type="text" aria-required="true" name="contact-form-email"
+								<!-- <input  name="txtPostImage" type="text" aria-required="true" name="contact-form-email"
 									class="form-control" placeholder="Input your image URL" 
-									aria-invalid="true" required>
+									aria-invalid="true" required> -->
+									<label for="image">URL Image</label>
+								<input id="image" name="image" type="file" class="form-control" placeholder="URL Image" required>
 							</div><!-- col-sm-6 -->
+							<!-- <div class="form-group text-left">
+								<label for="image">URL Image</label>
+								<input id="image" name="image" type="file" class="form-control" placeholder="URL Image" required>
+							</div> -->
 
 							<div class="col-sm-12">
 								<textarea name="txtPostContent" rows="2" class="text-area-messge form-control"
@@ -54,7 +60,6 @@
 					</div>
 				</div>
 			</form>
-			<% } %>
 			<% }%>
 
 			<div class="row">

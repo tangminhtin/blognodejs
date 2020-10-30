@@ -2,6 +2,7 @@ const Post = require('../models/post');
 const Image = require('../models/image');
 const User = require('../models/user');
 const Comment = require('../models/comment');
+const likeheart = require('../models/likeheart');
 const { post } = require('../routes/post');
 
 exports.getIndex = (req, res, next) => {
@@ -97,9 +98,9 @@ exports.doPost = (req, res) => {
     const userIdPost = req.body.userPostId;
     const postTitle = req.body.txtPostTitle;
     const postContent = req.body.txtPostContent;
-    const postImageURL = req.body.txtPostImage;
+    const image = req.file.path;
     const datetime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    console.log(userIdPost, postTitle, postContent, postImageURL, datetime);
+    console.log(userIdPost, postTitle, postContent, image, datetime);
 
     Post
         .create({
@@ -115,7 +116,7 @@ exports.doPost = (req, res) => {
         .then(result => {
             Image
                 .create({
-                    image: postImageURL,
+                    image: image,
                     postId: result.postId
                 })
                 .then(result => {
@@ -138,12 +139,27 @@ exports.updateLike = (req, res) => {
                     path: '/404'
                 });
             } else {
-                console.log(post.likeStatus + "uuuuuu")
-                if (!post.likeStatus) {
-                    Post.update({ like: ++post.like, likeStatus: 1}, { where: { postId: post.postId } });
-                } else if(post.likeStatus){
-                    Post.update({ like: --post.like, likeStatus: 0 }, { where: { postId: post.postId } });
-                }
+                likeheart.findOne({where: {postId: postId, userId: req.session.user.userId} })
+                .then(heart => {
+                    console.log(postId, req.session.user.userId);
+                    if(heart == null){
+                        likeheart.create({
+                            userId: req.session.user.userId,
+                            postId: postId,
+                            status: true
+                        })
+                        Post.update({ like: ++post.like}, { where: { postId: post.postId } });
+                    }else{
+                        if(heart.status === true ){
+                            Post.update({ like: --post.like}, { where: { postId: post.postId } });
+                            likeheart.update({ status: false}, { where: { postId: post.postId, userId: req.session.user.userId} });
+                        }else{
+                            Post.update({ like: ++post.like}, { where: { postId: post.postId } });
+                            likeheart.update({ status: true}, { where: { postId: post.postId, userId: req.session.user.userId} });
+                        }
+                    }
+                })
+                .catch(err => console.log(err));
             }
 
         })
@@ -151,3 +167,4 @@ exports.updateLike = (req, res) => {
 
         res.redirect('/#heart');
 }
+
