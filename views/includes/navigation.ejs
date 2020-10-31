@@ -14,14 +14,16 @@
             <li><a href="/logout">Logout</a></li>
             <%}%>
         </ul><!-- main-menu -->
-
+        <!-- <%if(isAuthenticated){%> -->
         <div class="src-area">
-            <form >
+            <form action="/search" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-                <input class="src-input" type="text" placeholder="Type of search">
-            </form>
-            
+                <input name="search" class="src-input" type="text" placeholder="Type of search">
+                
+            </form>           
         </div>
+        <!-- <%}%> -->
 
     </div><!-- conatiner -->
 </header>

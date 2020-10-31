@@ -42,3 +42,5 @@ npm run start-server
 ## npm install connect-session-sequelize
 
 ## npm install --save multer
+
+## npm install --save-dev mocha

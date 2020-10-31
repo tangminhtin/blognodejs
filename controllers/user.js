@@ -85,6 +85,25 @@ exports.getProfile = (req, res, next) => {
         })
         .catch(err => console.log(err));
 };
+
+exports.search = (req, res) =>{
+    const input = req.body.search;
+
+    User.findOne({where: {fullname: input}})
+    .then(user => {
+        console.log(user);
+        
+        Post.findAll({where: {userId: user.userId}})
+        .then(result => {
+            res.render("/", {
+                pageTitle: 'Welcome to Hack Brain Blog',
+                url: '/',
+                posts: posts
+            });
+        });
+    })
+    .catch(err => console.log(err));
+};
 // <<<<<<< HEAD
 // =======
 
